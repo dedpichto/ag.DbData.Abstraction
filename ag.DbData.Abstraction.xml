@@ -1,0 +1,426 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ag.DbData.Abstraction</name>
+    </assembly>
+    <members>
+        <member name="T:ag.DbData.Abstraction.DbDataException">
+            <summary>
+            Represents custom DbData exception.
+            </summary>
+        </member>
+        <member name="P:ag.DbData.Abstraction.DbDataException.CommandText">
+            <summary>
+            Gets text of SQL command caused the exception.
+            </summary>
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataException.#ctor(System.Exception,System.String)">
+            <summary>
+            Creates new instance of DbDataException.
+            </summary>
+            <param name="ex">Original exception.</param>
+            <param name="commandText">SQL command text.</param>
+        </member>
+        <member name="T:ag.DbData.Abstraction.DbDataObject">
+            <summary>
+            Abstract class implemented IDbDataObject interface.
+            </summary>
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.#ctor(Microsoft.Extensions.Logging.ILogger{ag.DbData.Abstraction.IDbDataObject},Microsoft.Extensions.Options.IOptions{ag.DbData.Abstraction.DbDataSettings})">
+            <summary>
+            Creates new instance of <see cref="T:ag.DbData.Abstraction.DbDataObject"/>.
+            </summary>
+            <param name="logger"><see cref="T:Microsoft.Extensions.Logging.ILogger"/> object.</param>
+            <param name="options"><see cref="T:ag.DbData.Abstraction.DbDataSettings"/> options.</param>
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.#ctor(Microsoft.Extensions.Logging.ILogger{ag.DbData.Abstraction.IDbDataObject})">
+            <summary>
+            Creates new instance of <see cref="T:ag.DbData.Abstraction.DbDataObject"/>.
+            </summary>
+            <param name="logger"><see cref="T:Microsoft.Extensions.Logging.ILogger"/> object.</param>
+        </member>
+        <member name="P:ag.DbData.Abstraction.DbDataObject.Connection">
+            <summary>
+            Represents a connection to a database.
+            </summary>
+        </member>
+        <member name="P:ag.DbData.Abstraction.DbDataObject.Logger">
+            <summary>
+            Represents logger object.
+            </summary>
+        </member>
+        <member name="P:ag.DbData.Abstraction.DbDataObject.TransConnection">
+            <summary>
+            Represents a connection to a database used for transactions.
+            </summary>
+        </member>
+        <member name="P:ag.DbData.Abstraction.DbDataObject.Transaction">
+            <summary>
+            Represents transaction.
+            </summary>
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataSet(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataSet(System.String,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataSet(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataSet(System.String,System.Collections.Generic.IEnumerable{System.String},System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataSetInTransaction(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataSetInTransaction(System.String,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataSetInTransaction(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataSetInTransaction(System.String,System.Collections.Generic.IEnumerable{System.String},System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataTable(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataTable(System.String,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataTableInTransaction(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataTableInTransaction(System.String,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.ExecuteCommand(System.Data.Common.DbCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.ExecuteCommand(System.Data.Common.DbCommand,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.ExecuteCommandInTransaction(System.Data.Common.DbCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.ExecuteCommandInTransaction(System.Data.Common.DbCommand,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.BeginTransaction(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.GetSchema">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.GetSchema(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.GetSchema(System.String,System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.GetScalar(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.GetScalar(System.String,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.Execute(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.Execute(System.String,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.GetDataReader(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.GetDataReader(System.String,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.CommitTransaction">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.RollbackTransaction">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.ExecuteInTransaction(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.ExecuteInTransaction(System.String,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.GetScalarInTransaction(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.GetScalarInTransaction(System.String,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.Dispose">
+            <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
+        </member>
+        <member name="T:ag.DbData.Abstraction.DbDataSettings">
+            <summary>
+            Represents <see cref="N:ag.DbData"/> settings.
+            </summary>
+        </member>
+        <member name="P:ag.DbData.Abstraction.DbDataSettings.AllowExceptionLogging">
+            <summary>
+            Specifies whether exceptions logging is allowed.
+            </summary>
+        </member>
+        <member name="T:ag.DbData.Abstraction.Factories.IDbDataFactory">
+            <summary>
+            Represents IDbDataFactory interface.
+            </summary>
+        </member>
+        <member name="M:ag.DbData.Abstraction.Factories.IDbDataFactory.Create(System.String)">
+            <summary>
+            Creates object of type <see cref="T:ag.DbData.Abstraction.IDbDataObject"/>.
+            </summary>
+            <param name="connectionString">Database connection string.</param>
+            <returns><see cref="T:ag.DbData.Abstraction.IDbDataObject"/>.</returns>
+        </member>
+        <member name="T:ag.DbData.Abstraction.IDbDataObject">
+            <summary>
+            Represents IDbDataObject interface.
+            </summary>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.BeginTransaction(System.String)">
+            <summary>
+            Begins transaction on database specified in connection string.
+            </summary>
+            <param name="connectionString">Connection string.</param>
+            <returns>True if transaction has been started, false otherwise.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.CommitTransaction">
+            <summary>
+            Commits transaction.
+            </summary>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.RollbackTransaction">
+            <summary>
+            Rolls back transaction.
+            </summary>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.FillDataSet(System.String)">
+            <summary>
+            Fills <see cref="T:System.Data.DataSet"/> accordingly to specified SQL query.
+            </summary>
+            <param name="query">SQL query.</param>
+            <returns><see cref="T:System.Data.DataSet"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.FillDataSet(System.String,System.Int32)">
+            <summary>
+            Fills <see cref="T:System.Data.DataSet"/> accordingly to specified SQL query and command timeout.
+            </summary>
+            <param name="query">SQL query.</param>
+            <param name="timeout">Command timeout.</param>
+            <returns><see cref="T:System.Data.DataSet"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.FillDataSet(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Fills <see cref="T:System.Data.DataSet"/> accordingly to specified SQL query, storing results in tables with names specified in <paramref name="tables"/> parameter.
+            </summary>
+            <param name="query">SQL query.</param>
+            <param name="tables">List of tables names tbe used in DataSet.</param>
+            <returns><see cref="T:System.Data.DataSet"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.FillDataSet(System.String,System.Collections.Generic.IEnumerable{System.String},System.Int32)">
+            <summary>
+            Fills <see cref="T:System.Data.DataSet"/> accordingly to specified SQL query and command timeout, storing results in tables with names specified in <paramref name="tables"/> parameter.
+            </summary>
+            <param name="query">SQL query.</param>
+            <param name="tables">List of tables names tbe used in DataSet.</param>
+            <param name="timeout">Command timeout</param>
+            <returns><see cref="T:System.Data.DataSet"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.FillDataSetInTransaction(System.String)">
+            <summary>
+            Fills <see cref="T:System.Data.DataSet"/> in transaction accordingly to specified SQL query.
+            </summary>
+            <param name="query">SQL query.</param>
+            <returns><see cref="T:System.Data.DataSet"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.FillDataSetInTransaction(System.String,System.Int32)">
+            <summary>
+            Fills <see cref="T:System.Data.DataSet"/> in transaction accordingly to specified SQL query and command timeout.
+            </summary>
+            <param name="query">SQL query.</param>
+            <param name="timeout">Command timeout.</param>
+            <returns><see cref="T:System.Data.DataSet"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.FillDataSetInTransaction(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Fills <see cref="T:System.Data.DataSet"/> in transaction accordingly to specified SQL query, storing results in tables with names specified in <paramref name="tables"/> parameter.
+            </summary>
+            <param name="query">SQL query.</param>
+            <param name="tables">List of tables names tbe used in DataSet.</param>
+            <returns><see cref="T:System.Data.DataSet"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.FillDataSetInTransaction(System.String,System.Collections.Generic.IEnumerable{System.String},System.Int32)">
+            <summary>
+            Fills <see cref="T:System.Data.DataSet"/> in transaction accordingly to specified SQL query and command timeout, storing results in tables with names specified in <paramref name="tables"/> parameter.
+            </summary>
+            <param name="query">SQL query.</param>
+            <param name="tables">List of tables names tbe used in DataSet.</param>
+            <param name="timeout">Command timeout.</param>
+            <returns><see cref="T:System.Data.DataSet"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.FillDataTable(System.String)">
+            <summary>
+            Fills <see cref="T:System.Data.DataTable"/> accordingly to specified SQL query.
+            </summary>
+            <param name="query">SQL query.</param>
+            <returns><see cref="T:System.Data.DataTable"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.FillDataTable(System.String,System.Int32)">
+            <summary>
+            Fills <see cref="T:System.Data.DataTable"/> accordingly to specified SQL query and command timeout.
+            </summary>
+            <param name="query">SQL query.</param>
+            <param name="timeout">Command timeout.</param>
+            <returns><see cref="T:System.Data.DataTable"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.FillDataTableInTransaction(System.String)">
+            <summary>
+            Fills <see cref="T:System.Data.DataTable"/> in transaction accordingly to specified SQL query.
+            </summary>
+            <param name="query">SQL query.</param>
+            <returns><see cref="T:System.Data.DataTable"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.FillDataTableInTransaction(System.String,System.Int32)">
+            <summary>
+            Fills <see cref="T:System.Data.DataTable"/> in transaction accordingly to specified SQL query and command timeout.
+            </summary>
+            <param name="query">SQL query.</param>
+            <param name="timeout">Command timeout.</param>
+            <returns><see cref="T:System.Data.DataTable"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.Execute(System.String)">
+            <summary>
+            Executes specified SQL query.
+            </summary>
+            <param name="query">SQL query.</param>
+            <returns>Numbers of rows affected by execution.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.Execute(System.String,System.Int32)">
+            <summary>
+            Executes specified SQL query with specified command timeout.
+            </summary>
+            <param name="query">SQL query.</param>
+            <param name="timeout">Command timeout.</param>
+            <returns>Numbers of rows affected by execution.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.ExecuteInTransaction(System.String)">
+            <summary>
+            Executes specified SQL query in transaction.
+            </summary>
+            <param name="query">SQL query.</param>
+            <returns>Numbers of rows affected by execution.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.ExecuteInTransaction(System.String,System.Int32)">
+            <summary>
+            Executes specified SQL query in transaction with specified command timeout.
+            </summary>
+            <param name="query">SQL query.</param>
+            <param name="timeout">Command timeout.</param>
+            <returns>Numbers of rows affected by execution.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.GetDataReader(System.String)">
+            <summary>
+            Gets <see cref="T:System.Data.Common.DbDataReader"/> for specified SQL query.
+            </summary>
+            <param name="query">SQL query.</param>
+            <returns><see cref="T:System.Data.Common.DbDataReader"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.GetDataReader(System.String,System.Int32)">
+            <summary>
+            Gets <see cref="T:System.Data.Common.DbDataReader"/> for specified SQL query with specified command timeout.
+            </summary>
+            <param name="query">SQL query.</param>
+            <param name="timeout">Command timeout.</param>
+            <returns><see cref="T:System.Data.Common.DbDataReader"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.ExecuteCommand(System.Data.Common.DbCommand)">
+            <summary>
+            Executes <see cref="T:System.Data.Common.DbCommand"/>.
+            </summary>
+            <param name="cmd"><see cref="T:System.Data.Common.DbCommand"/>.</param>
+            <returns>Number of rows affected by execution.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.ExecuteCommand(System.Data.Common.DbCommand,System.Int32)">
+            <summary>
+            Executes <see cref="T:System.Data.Common.DbCommand"/> with specified command timeout.
+            </summary>
+            <param name="cmd"><see cref="T:System.Data.Common.DbCommand"/>.</param>
+            <param name="timeout">Command timeout.</param>
+            <returns>Number of rows affected by execution.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.ExecuteCommandInTransaction(System.Data.Common.DbCommand)">
+            <summary>
+            Executes <see cref="T:System.Data.Common.DbCommand"/> in transaction.
+            </summary>
+            <param name="cmd"><see cref="T:System.Data.Common.DbCommand"/>.</param>
+            <returns>Number of rows affected by execution.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.ExecuteCommandInTransaction(System.Data.Common.DbCommand,System.Int32)">
+            <summary>
+            Executes <see cref="T:System.Data.Common.DbCommand"/> in transaction with specified command timeout.
+            </summary>
+            <param name="cmd"><see cref="T:System.Data.Common.DbCommand"/>.</param>
+            <param name="timeout">Command timeout.</param>
+            <returns>Number of rows affected by execution.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.GetSchema">
+            <summary>
+            Gets schema information for the data source of DbDataObject connection .
+            </summary>
+            <returns><see cref="T:System.Data.DataTable"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.GetSchema(System.String)">
+            <summary>
+            Gets schema information for the data source of DbDataObject connection using the specified string for the schema name.
+            </summary>
+            <param name="collectionName">Specifies the name of the schema to return.</param>
+            <returns><see cref="T:System.Data.DataTable"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.GetSchema(System.String,System.String[])">
+            <summary>
+            Gets schema information for the data source of DbDataObject connection using the specified string for the schema name and the specified string array for the restriction values.
+            </summary>
+            <param name="collectionName">Specifies the name of the schema to return.</param>
+            <param name="restrictedValues">Specifies a set of restriction values for the requested schema.</param>
+            <returns><see cref="T:System.Data.DataTable"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.GetScalar(System.String)">
+            <summary>
+            Gets scalar value for specified SQL query.
+            </summary>
+            <param name="query">SQL query.</param>
+            <returns><see cref="T:System.Object"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.GetScalar(System.String,System.Int32)">
+            <summary>
+            Gets scalar value for specified SQL query and command timeout.
+            </summary>
+            <param name="query">SQL query.</param>
+            <param name="timeout">Command timeout.</param>
+            <returns><see cref="T:System.Object"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.GetScalarInTransaction(System.String)">
+            <summary>
+            Gets scalar value for specified SQL query in transaction.
+            </summary>
+            <param name="query">SQL query.</param>
+            <returns><see cref="T:System.Object"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.GetScalarInTransaction(System.String,System.Int32)">
+            <summary>
+            Gets scalar value for specified SQL query and command timeout in transaction.
+            </summary>
+            <param name="query">SQL query.</param>
+            <param name="timeout">Command timeout.</param>
+            <returns><see cref="T:System.Object"/>.</returns>
+        </member>
+    </members>
+</doc>
