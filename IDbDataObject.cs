@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ag.DbData.Abstraction
 {
@@ -35,7 +37,7 @@ namespace ag.DbData.Abstraction
         DataSet FillDataSet(string query);
 
         /// <summary>
-        /// Fills <see cref="DataSet"/> accordingly to specified SQL query and command timeout.
+        /// Fills <see cref="DataSet"/> accordingly to specified SQL query with command timeout.
         /// </summary>
         /// <param name="query">SQL query.</param>
         /// <param name="timeout">Command timeout.</param>
@@ -51,7 +53,7 @@ namespace ag.DbData.Abstraction
         DataSet FillDataSet(string query, IEnumerable<string> tables);
 
         /// <summary>
-        /// Fills <see cref="DataSet"/> accordingly to specified SQL query and command timeout, storing results in tables with names specified in <paramref name="tables"/> parameter.
+        /// Fills <see cref="DataSet"/> accordingly to specified SQL query with command timeout, storing results in tables with names specified in <paramref name="tables"/> parameter.
         /// </summary>
         /// <param name="query">SQL query.</param>
         /// <param name="tables">List of tables names tbe used in DataSet.</param>
@@ -67,7 +69,7 @@ namespace ag.DbData.Abstraction
         DataSet FillDataSetInTransaction(string query);
 
         /// <summary>
-        /// Fills <see cref="DataSet"/> in transaction accordingly to specified SQL query and command timeout.
+        /// Fills <see cref="DataSet"/> in transaction accordingly to specified SQL query with command timeout.
         /// </summary>
         /// <param name="query">SQL query.</param>
         /// <param name="timeout">Command timeout.</param>
@@ -83,7 +85,7 @@ namespace ag.DbData.Abstraction
         DataSet FillDataSetInTransaction(string query, IEnumerable<string> tables);
 
         /// <summary>
-        /// Fills <see cref="DataSet"/> in transaction accordingly to specified SQL query and command timeout, storing results in tables with names specified in <paramref name="tables"/> parameter.
+        /// Fills <see cref="DataSet"/> in transaction accordingly to specified SQL query with command timeout, storing results in tables with names specified in <paramref name="tables"/> parameter.
         /// </summary>
         /// <param name="query">SQL query.</param>
         /// <param name="tables">List of tables names tbe used in DataSet.</param>
@@ -99,7 +101,7 @@ namespace ag.DbData.Abstraction
         DataTable FillDataTable(string query);
 
         /// <summary>
-        /// Fills <see cref="DataTable"/> accordingly to specified SQL query and command timeout.
+        /// Fills <see cref="DataTable"/> accordingly to specified SQL query with command timeout.
         /// </summary>
         /// <param name="query">SQL query.</param>
         /// <param name="timeout">Command timeout.</param>
@@ -114,7 +116,7 @@ namespace ag.DbData.Abstraction
         DataTable FillDataTableInTransaction(string query);
 
         /// <summary>
-        /// Fills <see cref="DataTable"/> in transaction accordingly to specified SQL query and command timeout.
+        /// Fills <see cref="DataTable"/> in transaction accordingly to specified SQL query with command timeout.
         /// </summary>
         /// <param name="query">SQL query.</param>
         /// <param name="timeout">Command timeout.</param>
@@ -225,7 +227,7 @@ namespace ag.DbData.Abstraction
         object GetScalar(string query);
 
         /// <summary>
-        /// Gets scalar value for specified SQL query and command timeout.
+        /// Gets scalar value for specified SQL query with command timeout.
         /// </summary>
         /// <param name="query">SQL query.</param>
         /// <param name="timeout">Command timeout.</param>
@@ -240,11 +242,77 @@ namespace ag.DbData.Abstraction
         object GetScalarInTransaction(string query);
 
         /// <summary>
-        /// Gets scalar value for specified SQL query and command timeout in transaction.
+        /// Gets scalar value for specified SQL query with command timeout in transaction.
         /// </summary>
         /// <param name="query">SQL query.</param>
         /// <param name="timeout">Command timeout.</param>
         /// <returns><see cref="object"/>.</returns>
         object GetScalarInTransaction(string query, int timeout);
+
+        #region Async methods
+        /// <summary>
+        /// Asynchronously executes specified SQL query.
+        /// </summary>
+        /// <param name="query">SQL query.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        Task<int> ExecuteAsync(string query);
+
+        /// <summary>
+        /// Asynchronously executes specified SQL query with specified command timeout.
+        /// </summary>
+        /// <param name="query">SQL query.</param>
+        /// <param name="timeout">Command timeout.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        Task<int> ExecuteAsync(string query, int timeout);
+
+        /// <summary>
+        /// Asynchronously executes specified SQL query with cancellation token.
+        /// </summary>
+        /// <param name="query">SQL query.</param>
+        /// <param name="cancellationToken">A token to cancel the asynchronous operation.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        Task<int> ExecuteAsync(string query, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Asynchronously executes specified SQL query with command timeout and cancellation token.
+        /// </summary>
+        /// <param name="query">SQL query.</param>
+        /// <param name="timeout">Command timeout.</param>
+        /// <param name="cancellationToken">A token to cancel the asynchronous operation.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        Task<int> ExecuteAsync(string query, int timeout, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Asynchronously gets scalar value for specified SQL query.
+        /// </summary>
+        /// <param name="query">SQL query.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        Task<object> GetScalarAsync(string query);
+
+        /// <summary>
+        /// Asynchronously gets scalar value for specified SQL query with command timeout.
+        /// </summary>
+        /// <param name="query">SQL query.</param>
+        /// <param name="timeout">Command timeout.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        Task<object> GetScalarAsync(string query, int timeout);
+
+        /// <summary>
+        /// Asynchronously gets scalar value for specified SQL query with cancellation token.
+        /// </summary>
+        /// <param name="query">SQL query.</param>
+        /// <param name="cancellationToken">>A token to cancel the asynchronous operation.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        Task<object> GetScalarAsync(string query, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Asynchronously gets scalar value for specified SQL query with command timeout and cancellation token.
+        /// </summary>
+        /// <param name="query">SQL query.</param>
+        /// <param name="timeout">Command timeout.</param>
+        /// <param name="cancellationToken">A token to cancel the asynchronous operation.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        Task<object> GetScalarAsync(string query, int timeout, CancellationToken cancellationToken);
+        #endregion
     }
 }

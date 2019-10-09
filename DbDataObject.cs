@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 
 namespace ag.DbData.Abstraction
@@ -60,6 +62,22 @@ namespace ag.DbData.Abstraction
         protected DbTransaction Transaction { get; set; }
         #endregion
 
+        #region Protected methods
+        /// <summary>
+        /// Checks whether valid timeout is set and if it is valid sets <see cref="DbCommand.CommandTimeout"/> property.
+        /// </summary>
+        /// <param name="command"><see cref="DbCommand"/>.</param>
+        /// <param name="timeout">Timeout value.</param>
+        /// <returns>True iff timeout is valid, false otherwise.</returns>
+        protected bool IsValidTimeout(DbCommand command, int timeout)
+        {
+            if (timeout == -1) return true;
+            if (timeout < 0) return false;
+            command.CommandTimeout = timeout;
+            return true;
+        } 
+        #endregion
+
         #region Abstract methods
         /// <inheritdoc />
         public abstract DataSet FillDataSet(string query);
@@ -111,6 +129,30 @@ namespace ag.DbData.Abstraction
 
         /// <inheritdoc />
         public abstract bool BeginTransaction(string connectionString);
+
+        /// <inheritdoc />
+        public abstract Task<int> ExecuteAsync(string query);
+
+        /// <inheritdoc />
+        public abstract Task<int> ExecuteAsync(string query, int timeout);
+
+        /// <inheritdoc />
+        public abstract Task<int> ExecuteAsync(string query, CancellationToken cancellationToken);
+
+        /// <inheritdoc />
+        public abstract Task<int> ExecuteAsync(string query, int timeout, CancellationToken cancellationToken);
+
+        /// <inheritdoc />
+        public abstract Task<object> GetScalarAsync(string query);
+
+        /// <inheritdoc />
+        public abstract Task<object> GetScalarAsync(string query, int timeout);
+
+        /// <inheritdoc />
+        public abstract Task<object> GetScalarAsync(string query, CancellationToken cancellationToken);
+
+        /// <inheritdoc />
+        public abstract Task<object> GetScalarAsync(string query, int timeout, CancellationToken cancellationToken);
 
         #endregion
 
@@ -265,11 +307,6 @@ namespace ag.DbData.Abstraction
                     ? TransConnection.CreateCommand()
                     : Connection.CreateCommand())
                 {
-                    cmd.CommandText = query;
-                    if (inTransaction)
-                        cmd.Transaction = Transaction;
-                    else
-                        Connection.Open();
                     if (timeout != -1)
                     {
                         if (timeout >= 0)
@@ -277,6 +314,11 @@ namespace ag.DbData.Abstraction
                         else
                             throw new ArgumentException("Invalid CommandTimeout value", nameof(timeout));
                     }
+                    cmd.CommandText = query;
+                    if (inTransaction)
+                        cmd.Transaction = Transaction;
+                    else
+                        Connection.Open();
                     var rows = cmd.ExecuteNonQuery();
                     return rows;
                 }
@@ -301,7 +343,6 @@ namespace ag.DbData.Abstraction
             cmd.CommandText = query;
             try
             {
-                Connection.Open();
                 if (timeout != -1)
                 {
                     if (timeout >= 0)
@@ -309,7 +350,7 @@ namespace ag.DbData.Abstraction
                     else
                         throw new ArgumentException("Invalid CommandTimeout value", nameof(timeout));
                 }
-
+                Connection.Open();
                 reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 return reader;
             }
@@ -339,15 +380,15 @@ namespace ag.DbData.Abstraction
                 using (var cmd = inTransaction ? TransConnection.CreateCommand() : Connection.CreateCommand())
                 {
                     cmd.CommandText = query;
-                    if (inTransaction)
-                        cmd.Transaction = Transaction;
-                    else
-                        Connection.Open();
                     if (timeout == -1) return cmd.ExecuteScalar();
                     if (timeout >= 0)
                         cmd.CommandTimeout = timeout;
                     else
                         throw new ArgumentException("Invalid CommandTimeout value", nameof(timeout));
+                    if (inTransaction)
+                        cmd.Transaction = Transaction;
+                    else
+                        Connection.Open();
                     return cmd.ExecuteScalar();
                 }
             }
