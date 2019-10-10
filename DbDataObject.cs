@@ -168,8 +168,8 @@ namespace ag.DbData.Abstraction
             }
             catch (Exception ex)
             {
-                Logger?.LogError(ex, "Error at GetSchema");
-                throw new DbDataException(ex, "Error at GetSchema");
+                Logger?.LogError(ex, $"Error at GetSchema");
+                throw new DbDataException(ex, $"Error at GetSchema");
             }
             finally
             {
@@ -188,8 +188,8 @@ namespace ag.DbData.Abstraction
             }
             catch (Exception ex)
             {
-                Logger?.LogError(ex, "Error at GetSchema");
-                throw new DbDataException(ex, "Error at GetSchema");
+                Logger?.LogError(ex, $"Error at GetSchema");
+                throw new DbDataException(ex, $"Error at GetSchema");
             }
             finally
             {
@@ -208,8 +208,8 @@ namespace ag.DbData.Abstraction
             }
             catch (Exception ex)
             {
-                Logger?.LogError(ex, "Error at GetSchema");
-                throw new DbDataException(ex, "Error at GetSchema");
+                Logger?.LogError(ex, $"Error at GetSchema");
+                throw new DbDataException(ex, $"Error at GetSchema");
             }
             finally
             {
@@ -251,8 +251,8 @@ namespace ag.DbData.Abstraction
             }
             catch (Exception ex)
             {
-                Logger?.LogError(ex, "Error at CommitTransaction");
-                throw new DbDataException(ex, "Error at CommitTransaction");
+                Logger?.LogError(ex, $"Error at CommitTransaction");
+                throw new DbDataException(ex, $"Error at CommitTransaction");
             }
         }
 
@@ -271,8 +271,8 @@ namespace ag.DbData.Abstraction
             }
             catch (Exception ex)
             {
-                Logger?.LogError(ex, "Error at RollbackTransaction");
-                throw new DbDataException(ex, "Error at RollbackTransaction");
+                Logger?.LogError(ex, $"Error at RollbackTransaction");
+                throw new DbDataException(ex, $"Error at RollbackTransaction");
             }
         }
 
@@ -325,7 +325,7 @@ namespace ag.DbData.Abstraction
             }
             catch (Exception ex)
             {
-                Logger?.LogError(ex, "Error at Execute");
+                Logger?.LogError(ex, $"Error at Execute; command text: {query}");
                 throw new DbDataException(ex, query);
             }
             finally
@@ -356,7 +356,7 @@ namespace ag.DbData.Abstraction
             }
             catch (DbException dex)
             {
-                Logger?.LogError(dex, "Error at GetDataReader");
+                Logger?.LogError(dex, $"Error at GetDataReader; command text: {query}");
                 throw new DbDataException(dex, query);
             }
             catch (Exception ex)
@@ -364,7 +364,7 @@ namespace ag.DbData.Abstraction
                 cmd.Cancel();
                 if (reader == null)
                     Connection.Close();
-                Logger?.LogError(ex, "Error at GetDataReader");
+                Logger?.LogError(ex, $"Error at GetDataReader; command text: {query}");
                 throw new DbDataException(ex, query);
             }
             finally
@@ -394,7 +394,7 @@ namespace ag.DbData.Abstraction
             }
             catch (Exception ex)
             {
-                Logger?.LogError(ex, "Error at GetScalar");
+                Logger?.LogError(ex, $"Error at GetScalar; command text: {query}");
                 throw new DbDataException(ex, query);
             }
             finally
