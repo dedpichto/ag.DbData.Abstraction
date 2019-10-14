@@ -26,6 +26,14 @@
             Abstract class implemented IDbDataObject interface.
             </summary>
         </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.#ctor(Microsoft.Extensions.Logging.ILogger{ag.DbData.Abstraction.IDbDataObject},Microsoft.Extensions.Options.IOptions{ag.DbData.Abstraction.DbDataSettings},ag.DbData.Abstraction.Services.DbDataStringProvider)">
+            <summary>
+            Creates new instance of <see cref="T:ag.DbData.Abstraction.DbDataObject"/>.
+            </summary>
+            <param name="logger"><see cref="T:Microsoft.Extensions.Logging.ILogger"/> object.</param>
+            <param name="options"><see cref="T:ag.DbData.Abstraction.DbDataSettings"/> options.</param>
+            <param name="stringProvider"><see cref="T:ag.DbData.Abstraction.Services.DbDataStringProvider"/>.</param>
+        </member>
         <member name="M:ag.DbData.Abstraction.DbDataObject.#ctor(Microsoft.Extensions.Logging.ILogger{ag.DbData.Abstraction.IDbDataObject},Microsoft.Extensions.Options.IOptions{ag.DbData.Abstraction.DbDataSettings})">
             <summary>
             Creates new instance of <see cref="T:ag.DbData.Abstraction.DbDataObject"/>.
@@ -47,6 +55,11 @@
         <member name="P:ag.DbData.Abstraction.DbDataObject.Logger">
             <summary>
             Represents logger object.
+            </summary>
+        </member>
+        <member name="P:ag.DbData.Abstraction.DbDataObject.StringProvider">
+            <summary>
+            Represents <see cref="T:ag.DbData.Abstraction.Services.DbDataStringProvider"/> object.
             </summary>
         </member>
         <member name="P:ag.DbData.Abstraction.DbDataObject.TransConnection">
@@ -517,6 +530,28 @@
             <param name="timeout">Command timeout.</param>
             <param name="cancellationToken">A token to cancel the asynchronous operation.</param>
             <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:ag.DbData.Abstraction.Services.DbDataStringProvider">
+            <summary>
+            Provides basic encryption for connection string.
+            </summary>
+        </member>
+        <member name="P:ag.DbData.Abstraction.Services.DbDataStringProvider.ConnectionString">
+            <summary>
+            Encrypts connection string on set and decrypts it on get.
+            </summary>
+        </member>
+        <member name="T:ag.DbData.Abstraction.Services.IDbDataStringProviderFactory`1">
+            <summary>
+            RRepresents IDbDataStringProviderFactory interface.
+            </summary>
+            <typeparam name="T">The type used for creation of <see cref="T:ag.DbData.Abstraction.Services.DbDataStringProvider"/> object.</typeparam>
+        </member>
+        <member name="M:ag.DbData.Abstraction.Services.IDbDataStringProviderFactory`1.Get">
+            <summary>
+            Creates <see cref="T:ag.DbData.Abstraction.Services.DbDataStringProvider"/> of type T.
+            </summary>
+            <returns><see cref="T:ag.DbData.Abstraction.Services.DbDataStringProvider"/> of type T.</returns>
         </member>
     </members>
 </doc>

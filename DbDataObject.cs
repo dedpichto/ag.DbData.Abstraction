@@ -1,11 +1,12 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using ag.DbData.Abstraction.Services;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
 
 namespace ag.DbData.Abstraction
 {
@@ -14,7 +15,22 @@ namespace ag.DbData.Abstraction
     /// </summary>
     public abstract class DbDataObject : IDbDataObject
     {
+        
+        private DbConnection _connection;
+
         #region ctor
+
+        /// <summary>
+        /// Creates new instance of <see cref="DbDataObject"/>.
+        /// </summary>
+        /// <param name="logger"><see cref="ILogger"/> object.</param>
+        /// <param name="options"><see cref="DbDataSettings"/> options.</param>
+        /// <param name="stringProvider"><see cref="DbDataStringProvider"/>.</param>
+        protected DbDataObject(ILogger<IDbDataObject> logger, IOptions<DbDataSettings> options, DbDataStringProvider stringProvider) : this(logger, options)
+        {
+            StringProvider = stringProvider;
+        }
+
         /// <summary>
         /// Creates new instance of <see cref="DbDataObject"/>.
         /// </summary>
@@ -30,7 +46,7 @@ namespace ag.DbData.Abstraction
         /// Creates new instance of <see cref="DbDataObject"/>.
         /// </summary>
         /// <param name="logger"><see cref="ILogger"/> object.</param>
-        [ObsoleteAttribute("Used for backward compatibility with versions prior to 2.0.4.1")]
+        [Obsolete("Used for backward compatibility with versions prior to 2.0.4.1")]
         protected DbDataObject(ILogger<IDbDataObject> logger)
         {
             Logger = logger;
@@ -38,10 +54,24 @@ namespace ag.DbData.Abstraction
         #endregion
 
         #region Public properties
+
         /// <summary>
         /// Represents a connection to a database.
         /// </summary>
-        public DbConnection Connection { protected internal get; set; }
+        public DbConnection Connection
+        {
+            protected internal get
+            {
+                return _connection;
+            }
+            set
+            {
+                _connection = value;
+                if (StringProvider != null)
+                    StringProvider.ConnectionString = _connection.ConnectionString;
+            }
+        }
+
         #endregion
 
         #region Protected properties
@@ -49,7 +79,12 @@ namespace ag.DbData.Abstraction
         /// <summary>
         /// Represents logger object.
         /// </summary>
-        protected ILogger<IDbDataObject> Logger { get; set; }
+        protected ILogger<IDbDataObject> Logger { get; }
+
+        /// <summary>
+        /// Represents <see cref="DbDataStringProvider"/> object.
+        /// </summary>
+        protected DbDataStringProvider StringProvider { get; }
 
         /// <summary>
         /// Represents a connection to a database used for transactions.
@@ -75,7 +110,7 @@ namespace ag.DbData.Abstraction
             if (timeout < 0) return false;
             command.CommandTimeout = timeout;
             return true;
-        } 
+        }
         #endregion
 
         #region Abstract methods
@@ -168,8 +203,8 @@ namespace ag.DbData.Abstraction
             }
             catch (Exception ex)
             {
-                Logger?.LogError(ex, $"Error at GetSchema");
-                throw new DbDataException(ex, $"Error at GetSchema");
+                Logger?.LogError(ex, "Error at GetSchema");
+                throw new DbDataException(ex, "Error at GetSchema");
             }
             finally
             {
@@ -188,8 +223,8 @@ namespace ag.DbData.Abstraction
             }
             catch (Exception ex)
             {
-                Logger?.LogError(ex, $"Error at GetSchema");
-                throw new DbDataException(ex, $"Error at GetSchema");
+                Logger?.LogError(ex, "Error at GetSchema");
+                throw new DbDataException(ex, "Error at GetSchema");
             }
             finally
             {
@@ -208,8 +243,8 @@ namespace ag.DbData.Abstraction
             }
             catch (Exception ex)
             {
-                Logger?.LogError(ex, $"Error at GetSchema");
-                throw new DbDataException(ex, $"Error at GetSchema");
+                Logger?.LogError(ex, "Error at GetSchema");
+                throw new DbDataException(ex, "Error at GetSchema");
             }
             finally
             {
@@ -251,8 +286,8 @@ namespace ag.DbData.Abstraction
             }
             catch (Exception ex)
             {
-                Logger?.LogError(ex, $"Error at CommitTransaction");
-                throw new DbDataException(ex, $"Error at CommitTransaction");
+                Logger?.LogError(ex, "Error at CommitTransaction");
+                throw new DbDataException(ex, "Error at CommitTransaction");
             }
         }
 
@@ -271,8 +306,8 @@ namespace ag.DbData.Abstraction
             }
             catch (Exception ex)
             {
-                Logger?.LogError(ex, $"Error at RollbackTransaction");
-                throw new DbDataException(ex, $"Error at RollbackTransaction");
+                Logger?.LogError(ex, "Error at RollbackTransaction");
+                throw new DbDataException(ex, "Error at RollbackTransaction");
             }
         }
 
