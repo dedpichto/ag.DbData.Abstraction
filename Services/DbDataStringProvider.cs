@@ -9,16 +9,14 @@ namespace ag.DbData.Abstraction.Services
     /// <summary>
     /// Provides basic encryption for connection string.
     /// </summary>
-    public abstract class DbDataStringProvider
+    public class DbDataStringProvider: IDbDataStringProvider
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private byte[] _hash;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private byte[] _cipher;
-
-        /// <summary>
-        /// Encrypts connection string on set and decrypts it on get.
-        /// </summary>
+        
+        /// <inheritdoc />
         [DebuggerBrowsable( DebuggerBrowsableState.Never)]
         public string ConnectionString
         {
@@ -38,6 +36,9 @@ namespace ag.DbData.Abstraction.Services
         private byte[] encryptStringToBytesAes(string plainText)
         {
             byte[] encrypted;
+
+            if (string.IsNullOrEmpty(plainText))
+                return null;
 
             using (var aesAlg = Aes.Create())
             {
@@ -67,7 +68,10 @@ namespace ag.DbData.Abstraction.Services
         [DebuggerHidden]
         private string decryptStringFromBytesAes(byte[] cipherText)
         {
-            string plaintext;
+            var plaintext = "";
+
+            if (cipherText == null || cipherText.Length == 0)
+                return plaintext;
 
             using (var aesAlg = Aes.Create())
             {

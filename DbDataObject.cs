@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,7 +16,7 @@ namespace ag.DbData.Abstraction
     /// </summary>
     public abstract class DbDataObject : IDbDataObject
     {
-        
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private DbConnection _connection;
 
         #region ctor
@@ -25,8 +26,8 @@ namespace ag.DbData.Abstraction
         /// </summary>
         /// <param name="logger"><see cref="ILogger"/> object.</param>
         /// <param name="options"><see cref="DbDataSettings"/> options.</param>
-        /// <param name="stringProvider"><see cref="DbDataStringProvider"/>.</param>
-        protected DbDataObject(ILogger<IDbDataObject> logger, IOptions<DbDataSettings> options, DbDataStringProvider stringProvider) : this(logger, options)
+        /// <param name="stringProvider"><see cref="IDbDataStringProvider"/>.</param>
+        protected DbDataObject(ILogger<IDbDataObject> logger, IOptions<DbDataSettings> options, IDbDataStringProvider stringProvider) : this(logger, options)
         {
             StringProvider = stringProvider;
         }
@@ -58,6 +59,7 @@ namespace ag.DbData.Abstraction
         /// <summary>
         /// Represents a connection to a database.
         /// </summary>
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public DbConnection Connection
         {
             protected internal get
@@ -66,6 +68,7 @@ namespace ag.DbData.Abstraction
             }
             set
             {
+                _connection?.Dispose();
                 _connection = value;
                 if (StringProvider != null)
                     StringProvider.ConnectionString = _connection.ConnectionString;
@@ -84,16 +87,19 @@ namespace ag.DbData.Abstraction
         /// <summary>
         /// Represents <see cref="DbDataStringProvider"/> object.
         /// </summary>
-        protected DbDataStringProvider StringProvider { get; }
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        protected IDbDataStringProvider StringProvider { get; }
 
         /// <summary>
         /// Represents a connection to a database used for transactions.
         /// </summary>
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         protected DbConnection TransConnection { get; set; }
 
         /// <summary>
         /// Represents transaction.
         /// </summary>
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         protected DbTransaction Transaction { get; set; }
         #endregion
 

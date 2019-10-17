@@ -9,6 +9,8 @@
     <RepositoryUrl>https://github.com/dedpichto/ag.DbData.Abstraction</RepositoryUrl>
     <PackageProjectUrl>https://github.com/dedpichto/ag.DbData.Abstraction</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <RunAnalyzersDuringLiveAnalysis>true</RunAnalyzersDuringLiveAnalysis>
+    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
