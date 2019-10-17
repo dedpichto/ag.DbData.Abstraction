@@ -331,11 +331,40 @@ namespace ag.DbData.Abstraction
         #endregion
 
         #region IDisposable implementation
+
+        private bool _disposed;
+
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public void Dispose()
         {
-            Connection?.Dispose();
-            TransConnection?.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Protected implementation of Dispose pattern.
+        /// </summary>
+        /// <param name="disposing">Disposed flag.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed)
+                return;
+
+            if (disposing)
+            {
+                Connection?.Dispose();
+                TransConnection?.Dispose();
+            }
+
+            _disposed = true;
+        }
+
+        /// <summary>
+        /// Finalizer.
+        /// </summary>
+        ~DbDataObject()
+        {
+            Dispose(false);
         }
         #endregion
 

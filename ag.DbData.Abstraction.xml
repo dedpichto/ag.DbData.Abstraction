@@ -203,6 +203,17 @@
         <member name="M:ag.DbData.Abstraction.DbDataObject.Dispose">
             <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.Dispose(System.Boolean)">
+            <summary>
+            Protected implementation of Dispose pattern.
+            </summary>
+            <param name="disposing">Disposed flag.</param>
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.Finalize">
+            <summary>
+            Finalizer.
+            </summary>
+        </member>
         <member name="T:ag.DbData.Abstraction.DbDataSettings">
             <summary>
             Represents <see cref="N:ag.DbData"/> settings.

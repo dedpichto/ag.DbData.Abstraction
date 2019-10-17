@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ag.DbData.Abstraction.Services
+﻿namespace ag.DbData.Abstraction.Services
 {
     /// <summary>
     /// Represents IDbDataStringProvider interface.
