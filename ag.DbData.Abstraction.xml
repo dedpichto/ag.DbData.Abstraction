@@ -219,15 +219,31 @@
             Represents <see cref="N:ag.DbData"/> settings.
             </summary>
         </member>
+        <member name="M:ag.DbData.Abstraction.DbDataSettings.#ctor">
+            <summary>
+            Creates new instance of DbDataSettings.
+            </summary>
+        </member>
         <member name="P:ag.DbData.Abstraction.DbDataSettings.AllowExceptionLogging">
             <summary>
             Specifies whether exceptions logging is allowed.
+            </summary>
+        </member>
+        <member name="P:ag.DbData.Abstraction.DbDataSettings.ConnectionString">
+            <summary>
+            Database connection string.
             </summary>
         </member>
         <member name="T:ag.DbData.Abstraction.Factories.IDbDataFactory">
             <summary>
             Represents IDbDataFactory interface.
             </summary>
+        </member>
+        <member name="M:ag.DbData.Abstraction.Factories.IDbDataFactory.Create">
+            <summary>
+            Creates object of type <see cref="T:ag.DbData.Abstraction.IDbDataObject"/>.
+            </summary>
+            <returns><see cref="T:ag.DbData.Abstraction.IDbDataObject"/>.</returns>
         </member>
         <member name="M:ag.DbData.Abstraction.Factories.IDbDataFactory.Create(System.String)">
             <summary>

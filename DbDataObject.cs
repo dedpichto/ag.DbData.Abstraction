@@ -19,6 +19,9 @@ namespace ag.DbData.Abstraction
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private DbConnection _connection;
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private readonly DbDataSettings _dbDataSettings;
+
         #region ctor
 
         /// <summary>
@@ -30,6 +33,9 @@ namespace ag.DbData.Abstraction
         protected DbDataObject(ILogger<IDbDataObject> logger, IOptions<DbDataSettings> options, IDbDataStringProvider stringProvider) : this(logger, options)
         {
             StringProvider = stringProvider;
+            var connectionString = _dbDataSettings.ConnectionString;
+            if (!string.IsNullOrEmpty(connectionString))
+                StringProvider.ConnectionString = connectionString;
         }
 
         /// <summary>
@@ -39,8 +45,8 @@ namespace ag.DbData.Abstraction
         /// <param name="options"><see cref="DbDataSettings"/> options.</param>
         protected DbDataObject(ILogger<IDbDataObject> logger, IOptions<DbDataSettings> options)
         {
-            var dbDataSettings = options?.Value;
-            Logger = dbDataSettings == null || dbDataSettings.AllowExceptionLogging ? logger : null;
+            _dbDataSettings = options?.Value;
+            Logger = _dbDataSettings == null || _dbDataSettings.AllowExceptionLogging ? logger : null;
         }
 
         /// <summary>
@@ -110,7 +116,7 @@ namespace ag.DbData.Abstraction
         /// <param name="command"><see cref="DbCommand"/>.</param>
         /// <param name="timeout">Timeout value.</param>
         /// <returns>True iff timeout is valid, false otherwise.</returns>
-        protected bool IsValidTimeout(DbCommand command, int timeout)
+        protected static bool IsValidTimeout(DbCommand command, int timeout)
         {
             if (timeout == -1) return true;
             if (timeout < 0) return false;
