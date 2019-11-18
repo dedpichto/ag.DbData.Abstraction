@@ -414,7 +414,6 @@ namespace ag.DbData.Abstraction
 
         private DbDataReader innerGetDataReader(string query, int timeout)
         {
-            DbDataReader reader = null;
             var cmd = Connection.CreateCommand();
             cmd.CommandText = query;
             try
@@ -427,25 +426,19 @@ namespace ag.DbData.Abstraction
                         throw new ArgumentException("Invalid CommandTimeout value", nameof(timeout));
                 }
                 Connection.Open();
-                reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-                return reader;
+                return cmd.ExecuteReader(CommandBehavior.CloseConnection);
             }
             catch (DbException dex)
             {
+                if (Connection.State == ConnectionState.Open)
+                    Connection.Close();
                 Logger?.LogError(dex, $"Error at GetDataReader; command text: {query}");
                 throw new DbDataException(dex, query);
             }
             catch (Exception ex)
             {
-                cmd.Cancel();
-                if (reader == null)
-                    Connection.Close();
                 Logger?.LogError(ex, $"Error at GetDataReader; command text: {query}");
                 throw new DbDataException(ex, query);
-            }
-            finally
-            {
-                cmd.Dispose();
             }
         }
 
@@ -456,11 +449,13 @@ namespace ag.DbData.Abstraction
                 using (var cmd = inTransaction ? TransConnection.CreateCommand() : Connection.CreateCommand())
                 {
                     cmd.CommandText = query;
-                    if (timeout == -1) return cmd.ExecuteScalar();
-                    if (timeout >= 0)
-                        cmd.CommandTimeout = timeout;
-                    else
-                        throw new ArgumentException("Invalid CommandTimeout value", nameof(timeout));
+                    if (timeout != -1)
+                    {
+                        if (timeout >= 0)
+                            cmd.CommandTimeout = timeout;
+                        else
+                            throw new ArgumentException("Invalid CommandTimeout value", nameof(timeout));
+                    }
                     if (inTransaction)
                         cmd.Transaction = Transaction;
                     else

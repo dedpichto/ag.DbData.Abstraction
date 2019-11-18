@@ -4,13 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Andrey Gruber</Authors>
     <Description>Provides abstraction layer for various ag.DbData components.</Description>
-    <Version>3.0.0.1</Version>
+    <Version>3.0.0.2</Version>
     <PackageTags>Database, ADO.NET, NET, Core, Snandard, Framework</PackageTags>
     <RepositoryUrl>https://github.com/dedpichto/ag.DbData.Abstraction</RepositoryUrl>
     <PackageProjectUrl>https://github.com/dedpichto/ag.DbData.Abstraction</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <RunAnalyzersDuringLiveAnalysis>true</RunAnalyzersDuringLiveAnalysis>
     <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+    <PackageReleaseNotes>Fixed GetDataReader() and GetScalar() exceptions</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
