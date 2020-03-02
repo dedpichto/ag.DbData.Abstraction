@@ -6,3 +6,4 @@ Provides abstraction layer for following components:
 - [ag.DbData.PostgreSQL](https://github.com/dedpichto/ag.DbData.PostgreSQL)
 - [ag.DbData.SQLite](https://github.com/dedpichto/ag.DbData.SQLite)
 - [ag.DbData.SqlServer](https://github.com/dedpichto/ag.DbData.SqlServer)
+- [ag.DbData.DB2](https://github.com/dedpichto/ag.DbData.DB2)
