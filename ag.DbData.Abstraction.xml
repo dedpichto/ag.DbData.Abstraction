@@ -131,6 +131,9 @@
         <member name="M:ag.DbData.Abstraction.DbDataObject.BeginTransaction(System.String)">
             <inheritdoc />
         </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.BeginTransaction">
+            <inheritdoc />
+        </member>
         <member name="M:ag.DbData.Abstraction.DbDataObject.ExecuteAsync(System.String)">
             <inheritdoc />
         </member>
@@ -263,6 +266,12 @@
             </summary>
             <param name="connectionString">Connection string.</param>
             <returns>True if transaction has been started, false otherwise.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.BeginTransaction">
+            <summary>
+            Begins transaction on current database
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:ag.DbData.Abstraction.IDbDataObject.CommitTransaction">
             <summary>

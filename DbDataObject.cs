@@ -178,6 +178,9 @@ namespace ag.DbData.Abstraction
         public abstract bool BeginTransaction(string connectionString);
 
         /// <inheritdoc />
+        public abstract bool BeginTransaction();
+
+        /// <inheritdoc />
         public abstract Task<int> ExecuteAsync(string query);
 
         /// <inheritdoc />

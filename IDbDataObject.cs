@@ -20,6 +20,12 @@ namespace ag.DbData.Abstraction
         bool BeginTransaction(string connectionString);
 
         /// <summary>
+        /// Begins transaction on current database
+        /// </summary>
+        /// <returns></returns>
+        bool BeginTransaction();
+
+        /// <summary>
         /// Commits transaction.
         /// </summary>
         void CommitTransaction();
