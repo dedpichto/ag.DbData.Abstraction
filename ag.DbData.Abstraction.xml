@@ -185,6 +185,12 @@
         <member name="M:ag.DbData.Abstraction.DbDataObject.GetDataReader(System.String,System.Int32)">
             <inheritdoc />
         </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.GetDataReader(System.String,System.Data.CommandBehavior)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.GetDataReader(System.String,System.Data.CommandBehavior,System.Int32)">
+            <inheritdoc />
+        </member>
         <member name="M:ag.DbData.Abstraction.DbDataObject.CommitTransaction">
             <inheritdoc />
         </member>
@@ -420,6 +426,23 @@
             </summary>
             <param name="query">SQL query.</param>
             <param name="timeout">Command timeout.</param>
+            <returns><see cref="T:System.Data.Common.DbDataReader"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.GetDataReader(System.String,System.Data.CommandBehavior)">
+            <summary>
+            Gets <see cref="T:System.Data.Common.DbDataReader"/> for specified SQL query, using one of the <see cref="T:System.Data.CommandBehavior"/> values
+            </summary>
+            <param name="query">SQL query.</param>
+            <param name="commandBehavior">CommandBehavior value.</param>
+            <returns><see cref="T:System.Data.Common.DbDataReader"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.GetDataReader(System.String,System.Data.CommandBehavior,System.Int32)">
+            <summary>
+            Gets <see cref="T:System.Data.Common.DbDataReader"/> for specified SQL query with specified command timeout, using one of the <see cref="T:System.Data.CommandBehavior"/> values
+            </summary>
+            <param name="query"></param>
+            <param name="commandBehavior"></param>
+            <param name="timeout"></param>
             <returns><see cref="T:System.Data.Common.DbDataReader"/>.</returns>
         </member>
         <member name="M:ag.DbData.Abstraction.IDbDataObject.ExecuteCommand(System.Data.Common.DbCommand)">

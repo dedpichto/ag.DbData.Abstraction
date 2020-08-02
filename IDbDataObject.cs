@@ -175,6 +175,23 @@ namespace ag.DbData.Abstraction
         DbDataReader GetDataReader(string query, int timeout);
 
         /// <summary>
+        /// Gets <see cref="DbDataReader"/> for specified SQL query, using one of the <see cref="CommandBehavior"/> values
+        /// </summary>
+        /// <param name="query">SQL query.</param>
+        /// <param name="commandBehavior">CommandBehavior value.</param>
+        /// <returns><see cref="DbDataReader"/>.</returns>
+        DbDataReader GetDataReader(string query, CommandBehavior commandBehavior);
+
+        /// <summary>
+        /// Gets <see cref="DbDataReader"/> for specified SQL query with specified command timeout, using one of the <see cref="CommandBehavior"/> values
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="commandBehavior"></param>
+        /// <param name="timeout"></param>
+        /// <returns><see cref="DbDataReader"/>.</returns>
+        DbDataReader GetDataReader(string query, CommandBehavior commandBehavior, int timeout);
+
+        /// <summary>
         /// Executes <see cref="DbCommand"/>.
         /// </summary>
         /// <param name="cmd"><see cref="DbCommand"/>.</param>

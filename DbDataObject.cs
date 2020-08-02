@@ -281,10 +281,16 @@ namespace ag.DbData.Abstraction
         public int Execute(string query, int timeout) => innerExecute(query, timeout, false);
 
         /// <inheritdoc />
-        public DbDataReader GetDataReader(string query) => innerGetDataReader(query, -1);
+        public DbDataReader GetDataReader(string query) => innerGetDataReader(query, CommandBehavior.CloseConnection, -1);
 
         /// <inheritdoc />
-        public DbDataReader GetDataReader(string query, int timeout) => innerGetDataReader(query, timeout);
+        public DbDataReader GetDataReader(string query, int timeout) => innerGetDataReader(query, CommandBehavior.CloseConnection, timeout);
+
+        /// <inheritdoc />
+        public DbDataReader GetDataReader(string query, CommandBehavior commandBehavior) => innerGetDataReader(query, commandBehavior, -1);
+
+        /// <inheritdoc />
+        public DbDataReader GetDataReader(string query, CommandBehavior commandBehavior, int timeout) => innerGetDataReader(query, commandBehavior, timeout);
 
         /// <inheritdoc />
         public void CommitTransaction()
@@ -415,7 +421,7 @@ namespace ag.DbData.Abstraction
             }
         }
 
-        private DbDataReader innerGetDataReader(string query, int timeout)
+        private DbDataReader innerGetDataReader(string query, CommandBehavior commandBehavior, int timeout)
         {
             var cmd = Connection.CreateCommand();
             cmd.CommandText = query;
@@ -429,7 +435,7 @@ namespace ag.DbData.Abstraction
                         throw new ArgumentException("Invalid CommandTimeout value", nameof(timeout));
                 }
                 Connection.Open();
-                return cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                return cmd.ExecuteReader(commandBehavior);
             }
             catch (DbException dex)
             {
