@@ -130,6 +130,36 @@ namespace ag.DbData.Abstraction
         DataTable FillDataTableInTransaction(string query, int timeout);
 
         /// <summary>
+        /// Fills <see cref="DataTable"/> accordingly to specified DBCommand.
+        /// </summary>
+        /// <param name="dbCommand"><see cref="DbCommand"/>.</param>
+        /// <returns><see cref="DataTable"/>.</returns>
+        DataTable FillDataTable(DbCommand dbCommand);
+
+        /// <summary>
+        /// Fills <see cref="DataTable"/> accordingly to specified DBCommand with command timeout.
+        /// </summary>
+        /// <param name="dbCommand"><see cref="DbCommand"/>.</param>
+        /// /// <param name="timeout">Command timeout.</param>
+        /// <returns><see cref="DataTable"/>.</returns>
+        DataTable FillDataTable(DbCommand dbCommand, int timeout);
+
+        /// <summary>
+        /// Fills <see cref="DataTable"/> in transaction accordingly to specified DBCommand.
+        /// </summary>
+        /// <param name="dbCommand"><see cref="DbCommand"/>.</param>
+        /// <returns><see cref="DataTable"/>.</returns>
+        DataTable FillDataTableInTransaction(DbCommand dbCommand);
+
+        /// <summary>
+        /// Fills <see cref="DataTable"/> in transaction accordingly to specified DBCommand.
+        /// </summary>
+        /// <param name="dbCommand"><see cref="DbCommand"/>.</param>
+        /// <param name="timeout">Command timeout.</param>
+        /// <returns><see cref="DataTable"/>.</returns>
+        DataTable FillDataTableInTransaction(DbCommand dbCommand, int timeout);
+
+        /// <summary>
         /// Executes specified SQL query.
         /// </summary>
         /// <param name="query">SQL query.</param>

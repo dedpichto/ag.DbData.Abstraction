@@ -116,6 +116,18 @@
         <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataTableInTransaction(System.String,System.Int32)">
             <inheritdoc />
         </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataTable(System.Data.Common.DbCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataTable(System.Data.Common.DbCommand,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataTableInTransaction(System.Data.Common.DbCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataTableInTransaction(System.Data.Common.DbCommand,System.Int32)">
+            <inheritdoc />
+        </member>
         <member name="M:ag.DbData.Abstraction.DbDataObject.ExecuteCommand(System.Data.Common.DbCommand)">
             <inheritdoc />
         </member>
@@ -380,6 +392,36 @@
             Fills <see cref="T:System.Data.DataTable"/> in transaction accordingly to specified SQL query with command timeout.
             </summary>
             <param name="query">SQL query.</param>
+            <param name="timeout">Command timeout.</param>
+            <returns><see cref="T:System.Data.DataTable"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.FillDataTable(System.Data.Common.DbCommand)">
+            <summary>
+            Fills <see cref="T:System.Data.DataTable"/> accordingly to specified DBCommand.
+            </summary>
+            <param name="dbCommand"><see cref="T:System.Data.Common.DbCommand"/>.</param>
+            <returns><see cref="T:System.Data.DataTable"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.FillDataTable(System.Data.Common.DbCommand,System.Int32)">
+            <summary>
+            Fills <see cref="T:System.Data.DataTable"/> accordingly to specified DBCommand with command timeout.
+            </summary>
+            <param name="dbCommand"><see cref="T:System.Data.Common.DbCommand"/>.</param>
+            /// <param name="timeout">Command timeout.</param>
+            <returns><see cref="T:System.Data.DataTable"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.FillDataTableInTransaction(System.Data.Common.DbCommand)">
+            <summary>
+            Fills <see cref="T:System.Data.DataTable"/> in transaction accordingly to specified DBCommand.
+            </summary>
+            <param name="dbCommand"><see cref="T:System.Data.Common.DbCommand"/>.</param>
+            <returns><see cref="T:System.Data.DataTable"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.FillDataTableInTransaction(System.Data.Common.DbCommand,System.Int32)">
+            <summary>
+            Fills <see cref="T:System.Data.DataTable"/> in transaction accordingly to specified DBCommand.
+            </summary>
+            <param name="dbCommand"><see cref="T:System.Data.Common.DbCommand"/>.</param>
             <param name="timeout">Command timeout.</param>
             <returns><see cref="T:System.Data.DataTable"/>.</returns>
         </member>

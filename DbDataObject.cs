@@ -163,6 +163,18 @@ namespace ag.DbData.Abstraction
         public abstract DataTable FillDataTableInTransaction(string query, int timeout);
 
         /// <inheritdoc />
+        public abstract DataTable FillDataTable(DbCommand dbCommand);
+
+        /// <inheritdoc />
+        public abstract DataTable FillDataTable(DbCommand dbCommand, int timeout);
+
+        /// <inheritdoc />
+        public abstract DataTable FillDataTableInTransaction(DbCommand dbCommand);
+
+        /// <inheritdoc />
+        public abstract DataTable FillDataTableInTransaction(DbCommand dbCommand, int timeout);
+
+        /// <inheritdoc />
         public abstract int ExecuteCommand(DbCommand cmd);
 
         /// <inheritdoc />
