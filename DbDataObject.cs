@@ -74,6 +74,12 @@ namespace ag.DbData.Abstraction
             }
             set
             {
+                if (value == null)
+                {
+                    _connection?.Dispose();
+                    _connection = null;
+                    return;
+                }
                 _connection?.Dispose();
                 _connection = value;
                 if (StringProvider != null)
@@ -379,8 +385,11 @@ namespace ag.DbData.Abstraction
 
             if (disposing)
             {
+                StringProvider?.Dispose();
                 Connection?.Dispose();
+                Connection = null;
                 TransConnection?.Dispose();
+                TransConnection = null;
             }
 
             _disposed = true;

@@ -640,6 +640,20 @@
         <member name="P:ag.DbData.Abstraction.Services.DbDataStringProvider.ConnectionString">
             <inheritdoc />
         </member>
+        <member name="M:ag.DbData.Abstraction.Services.DbDataStringProvider.Dispose(System.Boolean)">
+            <summary>
+            Protected implementation of Dispose pattern.
+            </summary>
+            <param name="disposing">Disposed flag.</param>
+        </member>
+        <member name="M:ag.DbData.Abstraction.Services.DbDataStringProvider.Dispose">
+            <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
+        </member>
+        <member name="M:ag.DbData.Abstraction.Services.DbDataStringProvider.Finalize">
+            <summary>
+            Finalizer.
+            </summary>
+        </member>
         <member name="T:ag.DbData.Abstraction.Services.IDbDataStringProvider">
             <summary>
             Represents IDbDataStringProvider interface.

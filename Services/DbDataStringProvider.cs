@@ -15,6 +15,7 @@ namespace ag.DbData.Abstraction.Services
         private byte[] _hash;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private byte[] _cipher;
+        private bool _disposed;
 
         /// <inheritdoc />
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -23,6 +24,11 @@ namespace ag.DbData.Abstraction.Services
             get => decryptStringFromBytesAes(_cipher);
             set
             {
+                if (value == null)
+                {
+                    _hash = _cipher = null;
+                    return;
+                }
                 _hash = new byte[32];
                 using (var rng = new RNGCryptoServiceProvider())
                 {
@@ -102,6 +108,41 @@ namespace ag.DbData.Abstraction.Services
             var iv = Encoding.ASCII.GetBytes(Convert.ToBase64String(_hash).Substring(7, 16));
             Array.Reverse(iv);
             return iv;
+        }
+
+        /// <summary>
+        /// Protected implementation of Dispose pattern.
+        /// </summary>
+        /// <param name="disposing">Disposed flag.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    ConnectionString = null;
+                }
+
+                _disposed = true;
+            }
+        }
+
+
+        /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+
+        /// <summary>
+        /// Finalizer.
+        /// </summary>
+        ~DbDataStringProvider()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: false);
         }
     }
 }
