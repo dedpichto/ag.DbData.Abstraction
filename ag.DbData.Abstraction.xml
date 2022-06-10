@@ -74,11 +74,11 @@
         </member>
         <member name="M:ag.DbData.Abstraction.DbDataObject.IsValidTimeout(System.Data.Common.DbCommand,System.Int32)">
             <summary>
-            Checks whether valid timeout is set and if it is valid sets <see cref="P:System.Data.Common.DbCommand.CommandTimeout"/> property.
+            Checks whether valid timeout is set for <see cref="P:System.Data.Common.DbCommand.CommandTimeout"/> property.
             </summary>
             <param name="command"><see cref="T:System.Data.Common.DbCommand"/>.</param>
             <param name="timeout">Timeout value.</param>
-            <returns>True iff timeout is valid, false otherwise.</returns>
+            <returns>True if timeout is valid, false otherwise.</returns>
         </member>
         <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataSet(System.String)">
             <inheritdoc />

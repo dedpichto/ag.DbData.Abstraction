@@ -117,11 +117,11 @@ namespace ag.DbData.Abstraction
 
         #region Protected methods
         /// <summary>
-        /// Checks whether valid timeout is set and if it is valid sets <see cref="DbCommand.CommandTimeout"/> property.
+        /// Checks whether valid timeout is set for <see cref="DbCommand.CommandTimeout"/> property.
         /// </summary>
         /// <param name="command"><see cref="DbCommand"/>.</param>
         /// <param name="timeout">Timeout value.</param>
-        /// <returns>True iff timeout is valid, false otherwise.</returns>
+        /// <returns>True if timeout is valid, false otherwise.</returns>
         protected static bool IsValidTimeout(DbCommand command, int timeout)
         {
             if (timeout == -1) return true;
@@ -129,6 +129,7 @@ namespace ag.DbData.Abstraction
             command.CommandTimeout = timeout;
             return true;
         }
+
         #endregion
 
         #region Abstract methods
@@ -444,19 +445,22 @@ namespace ag.DbData.Abstraction
 
         private DbDataReader innerGetDataReader(string query, CommandBehavior commandBehavior, int timeout)
         {
-            var cmd = Connection.CreateCommand();
-            cmd.CommandText = query;
             try
             {
-                if (timeout != -1)
+                using (var cmd = Connection.CreateCommand())
                 {
-                    if (timeout >= 0)
-                        cmd.CommandTimeout = timeout;
-                    else
-                        throw new ArgumentException("Invalid CommandTimeout value", nameof(timeout));
+                    cmd.CommandText = query;
+
+                    if (timeout != -1)
+                    {
+                        if (timeout >= 0)
+                            cmd.CommandTimeout = timeout;
+                        else
+                            throw new ArgumentException("Invalid CommandTimeout value", nameof(timeout));
+                    }
+                    Connection.Open();
+                    return cmd.ExecuteReader(commandBehavior);
                 }
-                Connection.Open();
-                return cmd.ExecuteReader(commandBehavior);
             }
             catch (DbException dex)
             {
