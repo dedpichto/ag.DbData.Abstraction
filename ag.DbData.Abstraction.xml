@@ -80,6 +80,16 @@
             <param name="timeout">Timeout value.</param>
             <returns>True if timeout is valid, false otherwise.</returns>
         </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataTableAsync(System.Data.Common.DbConnection,System.String,System.Threading.CancellationToken,System.Int32)">
+            <summary>
+            Async version of FillDataTable. Asynchronously fills <see cref="T:System.Data.DataTable"/> using specified SQL query, <see cref="T:System.Threading.CancellationToken"/> and command timeout.
+            </summary>
+            <param name="asyncConnection"><see cref="T:System.Data.Common.DbConnection"/> used for operation.</param>
+            <param name="query">SQL query.</param>
+            <param name="cancellationToken">A token to cancel the asynchronous operation.</param>
+            <param name="timeout">Timeout value.</param>
+            <returns></returns>
+        </member>
         <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataSet(System.String)">
             <inheritdoc />
         </member>
@@ -168,6 +178,18 @@
             <inheritdoc />
         </member>
         <member name="M:ag.DbData.Abstraction.DbDataObject.GetScalarAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataTableAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataTableAsync(System.String,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataTableAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.Abstraction.DbDataObject.FillDataTableAsync(System.String,System.Int32,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:ag.DbData.Abstraction.DbDataObject.GetSchema">
@@ -371,6 +393,7 @@
             </summary>
             <param name="query">SQL query.</param>
             <returns><see cref="T:System.Data.DataTable"/>.</returns>
+            <remarks>Use async version of <see cref="M:ag.DbData.Abstraction.IDbDataObject.FillDataTableAsync(System.String)"/> for async/await operations.</remarks>
         </member>
         <member name="M:ag.DbData.Abstraction.IDbDataObject.FillDataTable(System.String,System.Int32)">
             <summary>
@@ -379,6 +402,7 @@
             <param name="query">SQL query.</param>
             <param name="timeout">Command timeout.</param>
             <returns><see cref="T:System.Data.DataTable"/>.</returns>
+            <remarks>Use async version of <see cref="M:ag.DbData.Abstraction.IDbDataObject.FillDataTableAsync(System.String,System.Int32)"/> for async/await operations.</remarks>
         </member>
         <member name="M:ag.DbData.Abstraction.IDbDataObject.FillDataTableInTransaction(System.String)">
             <summary>
@@ -626,6 +650,38 @@
         <member name="M:ag.DbData.Abstraction.IDbDataObject.GetScalarAsync(System.String,System.Int32,System.Threading.CancellationToken)">
             <summary>
             Asynchronously gets scalar value for specified SQL query with command timeout and cancellation token.
+            </summary>
+            <param name="query">SQL query.</param>
+            <param name="timeout">Command timeout.</param>
+            <param name="cancellationToken">A token to cancel the asynchronous operation.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.FillDataTableAsync(System.String)">
+            <summary>
+            Async version of <see cref="M:ag.DbData.Abstraction.IDbDataObject.FillDataTable(System.String)"/>. Asynchronously fills <see cref="T:System.Data.DataTable"/> accordingly to specified SQL query.
+            </summary>
+            <param name="query">SQL query.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.FillDataTableAsync(System.String,System.Int32)">
+            <summary>
+            Async version of <see cref="M:ag.DbData.Abstraction.IDbDataObject.FillDataTable(System.String,System.Int32)"/>. Asynchronously fills <see cref="T:System.Data.DataTable"/> accordingly to specified SQL query with command timeout.
+            </summary>
+            <param name="query">SQL query.</param>
+            <param name="timeout">Command timeout.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.FillDataTableAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously fills <see cref="T:System.Data.DataTable"/> accordingly to specified SQL query with cancellation token.
+            </summary>
+            <param name="query">SQL query.</param>
+            <param name="cancellationToken">A token to cancel the asynchronous operation.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:ag.DbData.Abstraction.IDbDataObject.FillDataTableAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously fills <see cref="T:System.Data.DataTable"/> accordingly to specified SQL query with command timeout and cancellation token.
             </summary>
             <param name="query">SQL query.</param>
             <param name="timeout">Command timeout.</param>

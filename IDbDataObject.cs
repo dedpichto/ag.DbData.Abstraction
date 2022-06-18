@@ -104,6 +104,7 @@ namespace ag.DbData.Abstraction
         /// </summary>
         /// <param name="query">SQL query.</param>
         /// <returns><see cref="DataTable"/>.</returns>
+        /// <remarks>Use async version of <see cref="FillDataTableAsync(string)"/> for async/await operations.</remarks>
         DataTable FillDataTable(string query);
 
         /// <summary>
@@ -112,6 +113,7 @@ namespace ag.DbData.Abstraction
         /// <param name="query">SQL query.</param>
         /// <param name="timeout">Command timeout.</param>
         /// <returns><see cref="DataTable"/>.</returns>
+        /// <remarks>Use async version of <see cref="FillDataTableAsync(string, int)"/> for async/await operations.</remarks>
         DataTable FillDataTable(string query, int timeout);
 
         /// <summary>
@@ -366,6 +368,38 @@ namespace ag.DbData.Abstraction
         /// <param name="cancellationToken">A token to cancel the asynchronous operation.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
         Task<object> GetScalarAsync(string query, int timeout, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Async version of <see cref="FillDataTable(string)"/>. Asynchronously fills <see cref="DataTable"/> accordingly to specified SQL query.
+        /// </summary>
+        /// <param name="query">SQL query.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        Task<DataTable> FillDataTableAsync(string query);
+
+        /// <summary>
+        /// Async version of <see cref="FillDataTable(string, int)"/>. Asynchronously fills <see cref="DataTable"/> accordingly to specified SQL query with command timeout.
+        /// </summary>
+        /// <param name="query">SQL query.</param>
+        /// <param name="timeout">Command timeout.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        Task<DataTable> FillDataTableAsync(string query, int timeout);
+
+        /// <summary>
+        /// Asynchronously fills <see cref="DataTable"/> accordingly to specified SQL query with cancellation token.
+        /// </summary>
+        /// <param name="query">SQL query.</param>
+        /// <param name="cancellationToken">A token to cancel the asynchronous operation.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        Task<DataTable> FillDataTableAsync(string query, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Asynchronously fills <see cref="DataTable"/> accordingly to specified SQL query with command timeout and cancellation token.
+        /// </summary>
+        /// <param name="query">SQL query.</param>
+        /// <param name="timeout">Command timeout.</param>
+        /// <param name="cancellationToken">A token to cancel the asynchronous operation.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        Task<DataTable> FillDataTableAsync(string query, int timeout, CancellationToken cancellationToken);
         #endregion
     }
 }

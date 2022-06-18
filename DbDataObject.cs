@@ -130,6 +130,51 @@ namespace ag.DbData.Abstraction
             return true;
         }
 
+        /// <summary>
+        /// Async version of FillDataTable. Asynchronously fills <see cref="DataTable"/> using specified SQL query, <see cref="CancellationToken"/> and command timeout.
+        /// </summary>
+        /// <param name="asyncConnection"><see cref="DbConnection"/> used for operation.</param>
+        /// <param name="query">SQL query.</param>
+        /// <param name="cancellationToken">A token to cancel the asynchronous operation.</param>
+        /// <param name="timeout">Timeout value.</param>
+        /// <returns></returns>
+        protected async Task<DataTable> FillDataTableAsync(DbConnection asyncConnection, string query, CancellationToken cancellationToken, int timeout)
+        {
+            try
+            {
+                return await Task.Run(async () =>
+                    {
+                        var table = new DataTable();
+                        await asyncConnection.OpenAsync();
+                        using (var cmd = asyncConnection.CreateCommand())
+                        {
+                            if (!IsValidTimeout(cmd, timeout))
+                                throw new ArgumentException("Invalid CommandTimeout value", nameof(timeout));
+                            cmd.CommandText = query;
+                            using (var reader = await cmd.ExecuteReaderAsync(CommandBehavior.CloseConnection, cancellationToken))
+                            {
+                                var schemaTable = reader.GetSchemaTable();
+                                foreach (DataRow row in schemaTable.Rows)
+                                    table.Columns.Add(row["ColumnName"].ToString(), (Type)row["DataType"]);
+
+
+                                while (await reader.ReadAsync(cancellationToken))
+                                {
+                                    var dataRow = table.Rows.Add();
+                                    foreach (DataColumn column in table.Columns)
+                                        dataRow[column.ColumnName] = reader[column.ColumnName];
+                                }
+                            }
+                        }
+                        return table;
+                    });
+            }
+            catch (Exception ex)
+            {
+                Logger?.LogError(ex, $"Error at FillDataTableAsync; command text: {query}");
+                throw new DbDataException(ex, query);
+            }
+        }
         #endregion
 
         #region Abstract methods
@@ -223,6 +268,17 @@ namespace ag.DbData.Abstraction
         /// <inheritdoc />
         public abstract Task<object> GetScalarAsync(string query, int timeout, CancellationToken cancellationToken);
 
+        /// <inheritdoc />
+        public abstract Task<DataTable> FillDataTableAsync(string query);
+
+        /// <inheritdoc />
+        public abstract Task<DataTable> FillDataTableAsync(string query, int timeout);
+        
+        /// <inheritdoc />
+        public abstract Task<DataTable> FillDataTableAsync(string query, CancellationToken cancellationToken);
+        
+        /// <inheritdoc />
+        public abstract Task<DataTable> FillDataTableAsync(string query, int timeout, CancellationToken cancellationToken);
         #endregion
 
         #region Public methods
