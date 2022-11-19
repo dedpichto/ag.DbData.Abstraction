@@ -13,6 +13,10 @@ namespace ag.DbData.Abstraction
     public interface IDbDataObject : IDisposable
     {
         /// <summary>
+        /// Defines default command timeout for all operations. Value of null means that default command timeout of provider is used.
+        /// </summary>
+        int? DefaultCommandTimeout { get;set; }
+        /// <summary>
         /// Begins transaction on database specified in connection string.
         /// </summary>
         /// <param name="connectionString">Connection string.</param>

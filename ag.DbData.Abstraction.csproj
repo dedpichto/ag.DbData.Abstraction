@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Andrey Gruber</Authors>
     <Description>Provides abstraction layer for various ag.DbData components.</Description>
-    <Version>3.0.0.7</Version>
+    <Version>3.0.0.8</Version>
     <PackageTags>Database, ADO.NET, NET, Core, Snandard, Framework</PackageTags>
     <RepositoryUrl>https://github.com/dedpichto/ag.DbData.Abstraction</RepositoryUrl>
     <PackageProjectUrl>https://github.com/dedpichto/ag.DbData.Abstraction</PackageProjectUrl>

@@ -10,7 +10,12 @@
         /// </summary>
         /// <returns><see cref="IDbDataObject"/>.</returns>
         IDbDataObject Create();
-
+        /// <summary>
+        /// Creates object of type <see cref="IDbDataObject"/>.
+        /// </summary>
+        /// <param name="defaultCommandTimeOut">Replaces default coommand timeout of provider</param>
+        /// <returns></returns>
+        IDbDataObject Create(int defaultCommandTimeOut);
         /// <summary>
         /// Creates object of type <see cref="IDbDataObject"/>.
         /// </summary>

@@ -87,6 +87,8 @@ namespace ag.DbData.Abstraction
             }
         }
 
+        /// <inheritdoc />
+        public int? DefaultCommandTimeout { get; set; }
         #endregion
 
         #region Protected properties
@@ -142,6 +144,8 @@ namespace ag.DbData.Abstraction
         {
             try
             {
+                if (timeout == -1 & DefaultCommandTimeout != null)
+                    timeout = DefaultCommandTimeout.Value;
                 return await Task.Run(async () =>
                     {
                         var table = new DataTable();
@@ -273,10 +277,10 @@ namespace ag.DbData.Abstraction
 
         /// <inheritdoc />
         public abstract Task<DataTable> FillDataTableAsync(string query, int timeout);
-        
+
         /// <inheritdoc />
         public abstract Task<DataTable> FillDataTableAsync(string query, CancellationToken cancellationToken);
-        
+
         /// <inheritdoc />
         public abstract Task<DataTable> FillDataTableAsync(string query, int timeout, CancellationToken cancellationToken);
         #endregion
@@ -466,6 +470,8 @@ namespace ag.DbData.Abstraction
         {
             try
             {
+                if (timeout == -1 & DefaultCommandTimeout != null)
+                    timeout = DefaultCommandTimeout.Value;
                 using (var cmd = inTransaction
                     ? TransConnection.CreateCommand()
                     : Connection.CreateCommand())
@@ -503,6 +509,8 @@ namespace ag.DbData.Abstraction
         {
             try
             {
+                if (timeout == -1 & DefaultCommandTimeout != null)
+                    timeout = DefaultCommandTimeout.Value;
                 using (var cmd = Connection.CreateCommand())
                 {
                     cmd.CommandText = query;
@@ -536,6 +544,8 @@ namespace ag.DbData.Abstraction
         {
             try
             {
+                if (timeout == -1 & DefaultCommandTimeout != null)
+                    timeout = DefaultCommandTimeout.Value;
                 using (var cmd = inTransaction ? TransConnection.CreateCommand() : Connection.CreateCommand())
                 {
                     cmd.CommandText = query;

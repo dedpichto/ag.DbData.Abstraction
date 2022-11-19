@@ -52,6 +52,9 @@
             Represents a connection to a database.
             </summary>
         </member>
+        <member name="P:ag.DbData.Abstraction.DbDataObject.DefaultCommandTimeout">
+            <inheritdoc />
+        </member>
         <member name="P:ag.DbData.Abstraction.DbDataObject.Logger">
             <summary>
             Represents logger object.
@@ -288,6 +291,13 @@
             </summary>
             <returns><see cref="T:ag.DbData.Abstraction.IDbDataObject"/>.</returns>
         </member>
+        <member name="M:ag.DbData.Abstraction.Factories.IDbDataFactory.Create(System.Int32)">
+            <summary>
+            Creates object of type <see cref="T:ag.DbData.Abstraction.IDbDataObject"/>.
+            </summary>
+            <param name="defaultCommandTimeOut">Replaces default coommand timeout of provider</param>
+            <returns></returns>
+        </member>
         <member name="M:ag.DbData.Abstraction.Factories.IDbDataFactory.Create(System.String)">
             <summary>
             Creates object of type <see cref="T:ag.DbData.Abstraction.IDbDataObject"/>.
@@ -298,6 +308,11 @@
         <member name="T:ag.DbData.Abstraction.IDbDataObject">
             <summary>
             Represents IDbDataObject interface.
+            </summary>
+        </member>
+        <member name="P:ag.DbData.Abstraction.IDbDataObject.DefaultCommandTimeout">
+            <summary>
+            Defines default command timeout for all operations. Value of null means that default command timeout of provider is used.
             </summary>
         </member>
         <member name="M:ag.DbData.Abstraction.IDbDataObject.BeginTransaction(System.String)">
